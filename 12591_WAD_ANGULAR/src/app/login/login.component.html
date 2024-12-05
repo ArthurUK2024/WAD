@@ -1,0 +1,16 @@
+<div class="min-vh-100 d-flex flex-column justify-content-center align-items-center container">
+   <h2 class="mb-5">Login</h2>
+  <form style="min-width: 250px; max-width: 100%" (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <div class="mb-3">
+      <label class="d-block form-label" for="username">Username</label>
+      <input class="form-control" id="username" type="text" [(ngModel)]="username" name="username" required />
+    </div>
+    <div class="mb-3">
+      <label class="d-block form-label" for="password">Password:</label>
+      <input class="form-control" id="password" type="password" [(ngModel)]="password" name="password" required />
+    </div>
+    <div class="text-center">
+      <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid">Login</button>
+    </div>
+  </form>
+</div>

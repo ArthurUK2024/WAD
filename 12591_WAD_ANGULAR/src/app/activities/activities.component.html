@@ -1,0 +1,202 @@
+
+<div class="card">
+  <div class="card-body">
+
+    <!-- Modal for Editing Activity -->
+    <div class="modal fade" id="editActivityModal" tabindex="-1" aria-labelledby="editActivityLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editActivityLabel">Edit Activity</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="activityType" class="form-label">Activity Type</label>
+                <select [(ngModel)]="selectedActivity.activityType" name="activityType" id="inputState" class="form-select" required>
+                  <option selected>Choose...</option>
+                  <option value="walking">Walking</option>
+                  <option value="running">Running</option>
+                  <option value="cycling">Cycling</option>
+                  <option value="swimming">Swimming</option>
+                  <option value="yoga">Yoga</option>
+                  <option value="strength_training">Strength Training</option>
+                  <option value="cardio_workout">Cardio Workout</option>
+                  <option value="dancing">Dancing</option>
+                  <option value="hiking">Hiking</option>
+                  <option value="stretching">Stretching</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="duration" class="form-label">Duration (Minutes)</label>
+                <input type="number" class="form-control" id="duration" [(ngModel)]="selectedActivity.duration" name="duration" min="0">
+              </div>
+              <div class="mb-3">
+                <label for="caloriesBurned" class="form-label">Calories Burned</label>
+                <input type="number" class="form-control" id="caloriesBurned" [(ngModel)]="selectedActivity.caloriesBurned" name="caloriesBurned" min="0">
+              </div>
+              <div class="mb-3">
+                <label for="date" class="form-label">Date</label>
+                <input type="datetime-local" class="form-control" id="date" [(ngModel)]="selectedActivity.date" name="date">
+              </div>
+              <button (click)="updateActivity()" type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h5 class="card-title mb-0">My Activities</h5>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        + New Activity
+      </button>
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">New Activity Modal</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form class="row g-3">
+                <div class="col-12">
+                  <label for="inputState" class="form-label">Activity Type</label>
+                  <select [(ngModel)]="newActivity.activityType" name="activityType" id="inputState" class="form-select" required>
+                    <option selected>Choose...</option>
+                    <option value="walking">Walking</option>
+                    <option value="running">Running</option>
+                    <option value="cycling">Cycling</option>
+                    <option value="swimming">Swimming</option>
+                    <option value="yoga">Yoga</option>
+                    <option value="strength_training">Strength Training</option>
+                    <option value="cardio_workout">Cardio Workout</option>
+                    <option value="dancing">Dancing</option>
+                    <option value="hiking">Hiking</option>
+                    <option value="stretching">Stretching</option>
+                  </select>
+                </div>
+
+                <div class="col-12">
+                  <label for="duration" class="form-label">Duration (Minutes)</label>
+                  <input [(ngModel)]="newActivity.duration" name="duration" type="number" class="form-control" id="duration" placeholder="15" min="0">
+                </div>
+                <div class="col-12">
+                  <label for="calories" class="form-label">Calories</label>
+                  <input [(ngModel)]="newActivity.caloriesBurned" type="number" name="caloriesBurned" class="form-control" id="calories" placeholder="575" min="0">
+                </div>
+                <div class="col-12">
+                  {{ newActivity.date }}
+                  <label for="date" class="form-label">Activity Date</label>
+                  <input [(ngModel)]="newActivity.date" name="date" type="datetime-local" class="form-control" id="date">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button (click)="createActivity()" type="button" class="btn btn-primary">Add Activity</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <table class="table table-hover mb-0">
+      <thead class="table-light">
+        <tr>
+          <th>Activity Type</th>
+          <th>Duration (Minutes)</th>
+          <th>Calories Burned</th>
+          <th>Date</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="loading">
+          <td colspan="4">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Loading...
+          </td>
+        </tr>
+        <tr *ngFor="let activity of activities" class="align-middle">
+          <td>{{ activity.activityType }}</td>
+          <td>{{ activity.duration }}</td>
+          <td>{{ activity.caloriesBurned }}</td>
+          <td>{{ activity.date | date:'short' }}</td>
+          <td class="text-center">
+
+
+
+            <button type="button"
+                    class="btn btn-light btn-sm"
+                    data-bs-toggle="modal"
+                    [attr.data-bs-target]="'#activityViewModal' + activity.id">
+              View
+            </button>
+
+            <div class="modal fade" [id]="'activityViewModal' + activity.id" tabindex="-1" aria-labelledby="'activityViewModalLabel' + activity.id" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" [id]="'activityViewModalLabel' + activity.id">{{ activity.activityType }} Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p><strong>Activity Type:</strong> {{ activity.activityType }}</p>
+                    <p><strong>Duration:</strong> {{ activity.duration }} minutes</p>
+                    <p><strong>Calories Burned:</strong> {{ activity.caloriesBurned }}</p>
+                    <p><strong>Date:</strong> {{ activity.date | date:'short' }}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal fade" [id]="'activitDeleteModal' + activity.id" tabindex="-1" aria-labelledby="'activitDeleteModalLabel' + activity.id" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title text-danger" [id]="'activitDeleteLabel' + activity.id">Delete Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+
+                    <div class="alert alert-danger" role="alert">
+                      You are deleting this activity!
+                    </div>
+
+                    <p><strong>Activity Type:</strong> {{ activity.activityType }}</p>
+                    <p><strong>Duration:</strong> {{ activity.duration }} minutes</p>
+                    <p><strong>Calories Burned:</strong> {{ activity.caloriesBurned }}</p>
+                    <p><strong>Date:</strong> {{ activity.date | date:'short' }}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button (click)="deleteActivity(activity.id)" type="button" class="btn btn-danger">Delete</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button type="button" class="btn btn-outline-primary btn-sm mx-2"
+                    (click)="openEditModal(activity)"
+                    data-bs-toggle="modal" data-bs-target="#editActivityModal">
+              Edit
+            </button>
+
+            <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
+[attr.data-bs-target]="'#activitDeleteModal' + activity.id">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+

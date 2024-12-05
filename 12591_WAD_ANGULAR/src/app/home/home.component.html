@@ -1,0 +1,32 @@
+<app-navbar></app-navbar> <!-- Add NavbarComponent here -->
+
+<div class="row row-cols-1 row-cols-md-3 g-4 my-3">
+  <div class="col">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">👋 Welcome back {{ user.username }}</h5>
+        <p class="card-text mb-0">This is your dashboard to manage your activites, planes that you are making or your future goals to achieve them faster</p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">🤸 Recent activites</h5>
+        <p class="card-text mb-0">This card has supporting text below as a natural lead-in to additional content.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">
+          ⭐ Future goals <span class="badge bg-dark text-light ml-2">Imprtant</span>
+        </h5>
+        <p class="card-text mb-0">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-activities ></app-activities>
