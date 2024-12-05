@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using _12591_API.Modals;
 using Microsoft.Extensions.Hosting;
+using _12591_API.Models;
 
 namespace _12591_API.Data
 {
@@ -10,7 +11,7 @@ namespace _12591_API.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Activity> Activities { get; set; }
-
+        public DbSet<FutureGoal> FutureGoals { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()

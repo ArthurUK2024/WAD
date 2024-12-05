@@ -111,6 +111,85 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "_12591_API.Controllers.FutureGoalController",
+    "Method": "GetFutureGoals",
+    "RelativePath": "api/FutureGoal",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "_12591_API.Controllers.FutureGoalController",
+    "Method": "CreateFutureGoal",
+    "RelativePath": "api/FutureGoal",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "futureGoal",
+        "Type": "_12591_API.Models.FutureGoal",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "_12591_API.Controllers.FutureGoalController",
+    "Method": "GetFutureGoal",
+    "RelativePath": "api/FutureGoal/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "_12591_API.Controllers.FutureGoalController",
+    "Method": "UpdateFutureGoal",
+    "RelativePath": "api/FutureGoal/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "futureGoal",
+        "Type": "_12591_API.Models.FutureGoal",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "_12591_API.Controllers.FutureGoalController",
+    "Method": "DeleteFutureGoal",
+    "RelativePath": "api/FutureGoal/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "_12591_API.Controllers.UserController",
     "Method": "GetUsers",
     "RelativePath": "api/User",
