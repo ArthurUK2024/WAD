@@ -1,0 +1,162 @@
+<div class="card mb-5">
+  <div class="card-body">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h5 class="card-title mb-0">My Future Goals</h5>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#futureGoalCreate">
+        + New Goals
+      </button>
+
+      <div class="modal fade" id="futureGoalCreate" tabindex="-1" aria-labelledby="futureGoalCreateLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="futureGoalCreateLabel">New Future Goal Modal</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form class="row g-3">
+                <div class="col-12">
+                  <label for="goalName" class="form-label">Goal Name</label>
+                  <input [(ngModel)]="newGoal.goalName" name="goalName" type="text" class="form-control" id="goalName" placeholder="Learn new subjects...">
+                </div>
+                <div class="col-12">
+                  <label for="description" class="form-label">Description</label>
+                  <textarea [(ngModel)]="newGoal.description" name="description" class="form-control" id="description" placeholder="Description..." rows="4"></textarea>
+                </div>
+                <div class="col-12">
+                  <label for="targetDate" class="form-label">Target Date</label>
+                  <input [(ngModel)]="newGoal.targetDate" name="targetDate" type="date" class="form-control" id="targetDate">
+                </div>
+              </form>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button (click)="createGoal()" type="button" class="btn btn-primary">Add Goal</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="modal fade" id="futureGoalEdit" tabindex="-1" aria-labelledby="futureGoalEditLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="futureGoalEditLabel">Edit Future Goal Modal</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form class="row g-3">
+                <div class="col-12">
+                  <label for="goalName" class="form-label">Goal Name</label>
+                  <input [(ngModel)]="selectedGoal.goalName" name="goalName" type="text" class="form-control" id="goalName" placeholder="Learn new subjects...">
+                </div>
+                <div class="col-12">
+                  <label for="description" class="form-label">Description</label>
+                  <textarea [(ngModel)]="selectedGoal.description" name="description" class="form-control" id="description" placeholder="Description..." rows="4"></textarea>
+                </div>
+                <div class="col-12">
+                  <label for="targetDate" class="form-label">Target Date</label>
+                  <input [(ngModel)]="selectedGoal.targetDate" name="targetDate" type="date" class="form-control" id="targetDate">
+                </div>
+              </form>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button (click)="updateGoal()" type="button" class="btn btn-primary">Save Goal</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <table class="table table-hover mb-0">
+      <thead class="table-light">
+        <tr>
+          <th>Goal Name</th>
+          <th>Description</th>
+          <th>Target Date</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let goal of futureGoals" class="align-middle">
+          <td>{{ goal.goalName }}</td>
+          <td>{{ goal.description }}</td>
+          <td>{{ goal.targetDate | date: 'MMM d, y, h:mm a' }}</td>
+          <td class="text-end">
+            <button type="button"
+                    class="btn btn-light btn-sm"
+                    data-bs-toggle="modal"
+                    [attr.data-bs-target]="'#goalViewModal' + goal.id">
+              View
+            </button>
+
+            <div class="modal fade" [id]="'goalViewModal' + goal.id" tabindex="-1" aria-labelledby="'goalViewModalLabel' + goal.id" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" [id]="'goalViewModalLabel' + goal.id">Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body text-start">
+                    <p><strong>Goal Name:</strong> {{ goal.goalName }}</p>
+                    <p><strong>Description:</strong> {{ goal.description }}</p>
+                    <p><strong>Target Date:</strong> {{ goal.targetDate | date: 'MMMM d, y' }}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button type="button" (click)="selectGoal(goal)"
+                    class="btn btn-outline-primary btn-sm mx-2"
+                    data-bs-target="#futureGoalEdit" data-bs-toggle="modal"
+                    >
+              Edit
+            </button>
+
+            <button type="button"
+                    class="btn btn-outline-danger btn-sm"  data-bs-toggle="modal"
+ [attr.data-bs-target]="'#goalDeleteModal' + goal.id">
+              Delete
+            </button>
+
+
+            <div class="modal fade" [id]="'goalDeleteModal' + goal.id" tabindex="-1" aria-labelledby="'goalDeleteModalLabel' + goal.id" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title text-danger" [id]="'goalDeleteModalLabel' + goal.id">DELETE</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body text-start">
+                    <div class="alert alert-danger" role="alert">
+                      You are deleting this item!
+                    </div>
+
+                    <p><strong>Goal Name:</strong> {{ goal.goalName }}</p>
+                    <p><strong>Description:</strong> {{ goal.description }}</p>
+                    <p><strong>Target Date:</strong> {{ goal.targetDate | date: 'MMMM d, y' }}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button (click)="deleteGoal(goal.id)" type="button" class="btn btn-danger">Delete</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

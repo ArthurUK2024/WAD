@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ActivitiesComponent } from './activities/activities.component';
+import { FutureGoalsComponent } from './future-goals/future-goals.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { ActivitiesComponent } from './activities/activities.component';
     LoginComponent,
     LogoutComponent,
     NavbarComponent,
-    ActivitiesComponent
+    ActivitiesComponent,
+    FutureGoalsComponent
   ],
   imports: [
     BrowserModule,
