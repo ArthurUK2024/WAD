@@ -61,3 +61,13 @@ This project is part of my coursework for **Web Application Development** at the
 | **Migrations**           | Contains the Entity Framework migrations files for database updates. |
 | **Properties**           | Contains `launchSettings.json` for debugging and configuration.  |
 | **wwwroot**              | Contains static files (e.g., images, JavaScript, CSS) for serving from the server. |
+
+
+## Conclusion
+
+The **Fitness Tracker** web application provides an effective way for users to track their fitness activities and set personal goals.
+Overall, the **Fitness Tracker** app demonstrates key principles of web application development, including:
+- **Full-stack development**: Combining frontend and backend technologies to build a complete application.
+- **Authentication & Authorization**: Securing endpoints with JWT tokens to ensure user-specific data handling.
+- **Database Management**: Using **SQL Server** and **Entity Framework Core** to interact with the database and handle CRUD operations.
+- **Responsive Design**: Creating a mobile-friendly frontend with **Angular** and **Bootstrap** to provide an optimal user experience across devices.
